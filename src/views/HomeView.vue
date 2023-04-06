@@ -1,18 +1,35 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>{{ counter }}</h1>
+    <div>
+      <button @click="increment()">Increment</button>
+      <button @click="decrement()">Decrement</button>
+      <br>
+      <button @click="reset()">Reset</button>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'HomeView',
-  components: {
-    HelloWorld
+  components: {},
+  methods: {
+    increment() {
+      this.$store.dispatch('counter/increment', 1)
+    },
+    decrement() {
+      this.$store.dispatch('counter/decrement', 1)
+    },
+    reset() {
+      this.$store.dispatch('counter/reset')
+    }
+  },
+  computed: {
+    counter() {
+      return this.$store.state.counter.counter;
+    }
   }
 }
 </script>
